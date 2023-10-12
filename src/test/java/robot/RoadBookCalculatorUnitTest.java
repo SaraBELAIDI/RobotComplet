@@ -29,8 +29,10 @@ public class RoadBookCalculatorUnitTest {
         startPosition = new Coordinates(1,1);
         calculator = new RoadBookCalculator();
         sensor = mock(LandSensor.class);
-        when(sensor.isAccessible(any(Coordinates.class))).thenReturn(true);
+        Mockito.when(sensor.isAccessible(any(Coordinates.class))).thenReturn(true);
     }
+
+
 
 
     @Test
@@ -124,12 +126,12 @@ public class RoadBookCalculatorUnitTest {
     @Test
     public void testRouteSimple1() throws LandSensorDefaillance, UndefinedRoadbookException {
         LandSensor sensor = mock(LandSensor.class);
-        when(sensor.isAccessible(any(Coordinates.class))).thenReturn(true);
-        when(sensor.isAccessible(new Coordinates(1, 0))).thenReturn(false);
-        when(sensor.isAccessible(new Coordinates(3, 1))).thenReturn(false);
-        when(sensor.isAccessible(new Coordinates(2, -3))).thenReturn(false);
-        when(sensor.isAccessible(new Coordinates(2, -3))).thenReturn(false);
-        when(sensor.isAccessible(new Coordinates(5, -2))).thenReturn(false);
+        Mockito.when(sensor.isAccessible(any(Coordinates.class))).thenReturn(true);
+        Mockito.when(sensor.isAccessible(new Coordinates(1, 0))).thenReturn(false);
+        Mockito.when(sensor.isAccessible(new Coordinates(3, 1))).thenReturn(false);
+        Mockito.when(sensor.isAccessible(new Coordinates(2, -3))).thenReturn(false);
+        Mockito.when(sensor.isAccessible(new Coordinates(2, -3))).thenReturn(false);
+        Mockito.when(sensor.isAccessible(new Coordinates(5, -2))).thenReturn(false);
         book = calculator.calculateRoadBook(sensor, NORTH, startPosition, new Coordinates(5, -5));
         List<Instruction> expected = new ArrayList<Instruction>(Arrays.asList(TURNRIGHT, FORWARD, TURNLEFT, FORWARD, FORWARD, FORWARD, TURNRIGHT, FORWARD, FORWARD, TURNLEFT, FORWARD, FORWARD, FORWARD, TURNRIGHT, FORWARD));
         while (book.hasInstruction()) {
@@ -141,9 +143,9 @@ public class RoadBookCalculatorUnitTest {
     @Test
     public void testRouteSimple2() throws LandSensorDefaillance, UndefinedRoadbookException {
         LandSensor sensor = mock(LandSensor.class);
-        when(sensor.isAccessible(any(Coordinates.class))).thenReturn(true);
-        when(sensor.isAccessible(new Coordinates(1, 0))).thenReturn(false);
-        when(sensor.isAccessible(new Coordinates(5, -2))).thenReturn(false);
+        Mockito.when(sensor.isAccessible(any(Coordinates.class))).thenReturn(true);
+        Mockito.when(sensor.isAccessible(new Coordinates(1, 0))).thenReturn(false);
+        Mockito.when(sensor.isAccessible(new Coordinates(5, -2))).thenReturn(false);
         book = calculator.calculateRoadBook(sensor, NORTH, startPosition, new Coordinates(5, -5));
         List<Instruction> expected = new ArrayList<Instruction>(Arrays.asList(TURNRIGHT, FORWARD, FORWARD, FORWARD, FORWARD, TURNLEFT, FORWARD, FORWARD, TURNRIGHT, FORWARD, TURNLEFT, FORWARD, FORWARD, FORWARD, FORWARD, TURNLEFT, FORWARD));
         while (book.hasInstruction()) {
@@ -155,20 +157,20 @@ public class RoadBookCalculatorUnitTest {
     @Test
     public void testRouteCulDeSac() throws LandSensorDefaillance, UndefinedRoadbookException {
         LandSensor sensor = mock(LandSensor.class);
-        when(sensor.isAccessible(any(Coordinates.class))).thenReturn(true);
-        when(sensor.isAccessible(new Coordinates(1, -6))).thenReturn(false);
-        when(sensor.isAccessible(new Coordinates(0, -5))).thenReturn(false);
-        when(sensor.isAccessible(new Coordinates(2, -5))).thenReturn(false);
-        when(sensor.isAccessible(new Coordinates(0, -4))).thenReturn(false);
-        when(sensor.isAccessible(new Coordinates(2, -4))).thenReturn(false);
-        when(sensor.isAccessible(new Coordinates(0, -3))).thenReturn(false);
-        when(sensor.isAccessible(new Coordinates(2, -3))).thenReturn(false);
-        when(sensor.isAccessible(new Coordinates(0, -2))).thenReturn(false);
-        when(sensor.isAccessible(new Coordinates(2, -2))).thenReturn(false);
-        when(sensor.isAccessible(new Coordinates(0, -1))).thenReturn(false);
-        when(sensor.isAccessible(new Coordinates(2, -1))).thenReturn(false);
-        when(sensor.isAccessible(new Coordinates(0, 0))).thenReturn(false);
-        when(sensor.isAccessible(new Coordinates(2, 0))).thenReturn(false);
+        Mockito.when(sensor.isAccessible(any(Coordinates.class))).thenReturn(true);
+        Mockito.when(sensor.isAccessible(new Coordinates(1, -6))).thenReturn(false);
+        Mockito.when(sensor.isAccessible(new Coordinates(0, -5))).thenReturn(false);
+        Mockito.when(sensor.isAccessible(new Coordinates(2, -5))).thenReturn(false);
+        Mockito.when(sensor.isAccessible(new Coordinates(0, -4))).thenReturn(false);
+        Mockito.when(sensor.isAccessible(new Coordinates(2, -4))).thenReturn(false);
+        Mockito.when(sensor.isAccessible(new Coordinates(0, -3))).thenReturn(false);
+        Mockito.when(sensor.isAccessible(new Coordinates(2, -3))).thenReturn(false);
+        Mockito.when(sensor.isAccessible(new Coordinates(0, -2))).thenReturn(false);
+        Mockito.when(sensor.isAccessible(new Coordinates(2, -2))).thenReturn(false);
+        Mockito.when(sensor.isAccessible(new Coordinates(0, -1))).thenReturn(false);
+        Mockito.when(sensor.isAccessible(new Coordinates(2, -1))).thenReturn(false);
+        Mockito.when(sensor.isAccessible(new Coordinates(0, 0))).thenReturn(false);
+        Mockito.when(sensor.isAccessible(new Coordinates(2, 0))).thenReturn(false);
         book = calculator.calculateRoadBook(sensor, NORTH, startPosition, new Coordinates(5, -5));
         List<Instruction> expected = new ArrayList<Instruction>(Arrays.asList(TURNRIGHT, FORWARD, FORWARD, FORWARD, FORWARD, TURNLEFT, FORWARD, FORWARD, FORWARD, FORWARD, FORWARD, FORWARD));
         while (book.hasInstruction()) {
@@ -181,7 +183,7 @@ public class RoadBookCalculatorUnitTest {
     public void testArriveeInaccessible() throws LandSensorDefaillance, UndefinedRoadbookException {
         LandSensor sensor = mock(LandSensor.class);
         cartographie(sensor, startPosition, 2);
-        when(sensor.isAccessible(new Coordinates(0, 0))).thenReturn(false);
+        Mockito.when(sensor.isAccessible(new Coordinates(0, 0))).thenReturn(false);
         calculator.calculateRoadBook(sensor, NORTH, startPosition, new Coordinates(0, 0));
     }
 
@@ -196,34 +198,34 @@ public class RoadBookCalculatorUnitTest {
     public void testArriveeIsolee() throws LandSensorDefaillance, UndefinedRoadbookException {
         LandSensor sensor = mock(LandSensor.class);
         cartographie(sensor, startPosition, 4);
-        when(sensor.isAccessible(new Coordinates(3, -1))).thenReturn(false);
-        when(sensor.isAccessible(new Coordinates(2, -2))).thenReturn(false);
-        when(sensor.isAccessible(new Coordinates(4, -2))).thenReturn(false);
-        when(sensor.isAccessible(new Coordinates(3, -3))).thenReturn(false);
+        Mockito.when(sensor.isAccessible(new Coordinates(3, -1))).thenReturn(false);
+        Mockito.when(sensor.isAccessible(new Coordinates(2, -2))).thenReturn(false);
+        Mockito.when(sensor.isAccessible(new Coordinates(4, -2))).thenReturn(false);
+        Mockito.when(sensor.isAccessible(new Coordinates(3, -3))).thenReturn(false);
         book = calculator.calculateRoadBook(sensor, NORTH, startPosition, new Coordinates(3, -2));
     }
 
     @Test(expected = UndefinedRoadbookException.class)
     public void testArriveeHorsCarteSurCarteReduite() throws LandSensorDefaillance, UndefinedRoadbookException {
         LandSensor sensor = mock(LandSensor.class);
-        when(sensor.isAccessible(any(Coordinates.class))).thenReturn(false);
-        when(sensor.isAccessible(new Coordinates(1, 0))).thenReturn(true);
-        when(sensor.isAccessible(new Coordinates(1, -1))).thenReturn(true);
-        when(sensor.isAccessible(new Coordinates(1, -2))).thenReturn(true);
-        when(sensor.isAccessible(new Coordinates(2, -2))).thenReturn(true);
-        when(sensor.isAccessible(new Coordinates(3, -2))).thenReturn(true);
-        when(sensor.isAccessible(new Coordinates(3, -1))).thenReturn(true);
-        when(sensor.isAccessible(new Coordinates(3, 0))).thenReturn(true);
-        when(sensor.isAccessible(new Coordinates(2, 0))).thenReturn(true);
+        Mockito.when(sensor.isAccessible(any(Coordinates.class))).thenReturn(false);
+        Mockito.when(sensor.isAccessible(new Coordinates(1, 0))).thenReturn(true);
+        Mockito.when(sensor.isAccessible(new Coordinates(1, -1))).thenReturn(true);
+        Mockito.when(sensor.isAccessible(new Coordinates(1, -2))).thenReturn(true);
+        Mockito.when(sensor.isAccessible(new Coordinates(2, -2))).thenReturn(true);
+        Mockito.when(sensor.isAccessible(new Coordinates(3, -2))).thenReturn(true);
+        Mockito.when(sensor.isAccessible(new Coordinates(3, -1))).thenReturn(true);
+        Mockito.when(sensor.isAccessible(new Coordinates(3, 0))).thenReturn(true);
+        Mockito.when(sensor.isAccessible(new Coordinates(2, 0))).thenReturn(true);
         calculator.calculateRoadBook(sensor, NORTH, startPosition, new Coordinates(5, -5));
     }
 
 
     private void cartographie(LandSensor sensor, Coordinates startPosition, int distance) {
-        when(sensor.isAccessible(any(Coordinates.class))).thenReturn(false);
+        Mockito.when(sensor.isAccessible(any(Coordinates.class))).thenReturn(false);
         for (int i = startPosition.getX() - distance; i < startPosition.getX() + distance + 1; i++) {
             for (int j = startPosition.getY() - distance; j < startPosition.getY() + distance + 1; j++) {
-                when(sensor.isAccessible(new Coordinates(i, j))).thenReturn(true);
+                Mockito.when(sensor.isAccessible(new Coordinates(i, j))).thenReturn(true);
             }
         }
     }
